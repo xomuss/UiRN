@@ -1,33 +1,28 @@
 import React, {useState} from 'react';
 import SafeAreaView from 'react-native-safe-area-view';
-import {Button, TextInput, StyleSheet, View, Image} from 'react-native';
-import Logo from '../essets/Logo.svg';
+import {Button, TextInput, View, Image} from 'react-native';
+import styles from './styles';
 
 const LoginScreen = () => {
   const [email, onChangeEmail] = useState(null);
   const [password, onChangePassword] = useState(null);
 
-  return (
-    <SafeAreaView style={styles.container} forceInset={{top: 'always'}}>
-      <View
-        style={{
-          width: 200,
-          flex: 1,
-          backgroundColor: 'blue',
-          justifyContent: 'center',
-        }}>
+  //---render methods---
+
+  const Logo = () => {
+    return (
+      <View style={styles.logoContainer}>
         <Image
-          style={{height: 200, width: 200}}
+          style={styles.logoImg}
           source={require('../essets/2560px-React-icon.svg.png')}
         />
       </View>
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
-        }}>
+    );
+  };
+
+  const EmailPasswordInput = () => {
+    return (
+      <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
           value={email}
@@ -41,43 +36,26 @@ const LoginScreen = () => {
           style={styles.input}
         />
       </View>
-      <View style={{flex: 1, justifyContent: 'center', width: '100%'}}>
-        <View
-          style={{
-            backgroundColor: 'red',
-            width: '100%',
-            height: 50,
-            justifyContent: 'center',
-          }}>
+    );
+  };
+
+  const LoginButton = () => {
+    return (
+      <View style={styles.buttonContainer}>
+        <View style={styles.button}>
           <Button title="Log In" />
-          {/*<Logo />*/}
         </View>
       </View>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container} forceInset={{top: 'always'}}>
+      <Logo />
+      <EmailPasswordInput />
+      <LoginButton />
     </SafeAreaView>
   );
 };
-
-// eslint-disable-next-line no-undef
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignSelf: 'center',
-    width: '80%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    height: 40,
-    width: '100%',
-    margin: 12,
-    borderBottomWidth: 1,
-    padding: 10,
-  },
-  button: {
-    height: 20,
-    flex: 1,
-    width: '100%',
-  },
-});
 
 export default LoginScreen;
